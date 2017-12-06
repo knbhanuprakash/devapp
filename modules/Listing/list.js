@@ -1,4 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as listActions from '../../actions/listaction';
+
 class ShowList extends React.Component {
     constructor(props) {
         super(props);
@@ -17,9 +21,11 @@ class ShowList extends React.Component {
         this.setState(obj);
     }
     savedata() {
-        var fetcharray = this.state.listData.slice();
-        fetcharray.push({name: this.state.data, email: this.state.email});
-        this.setState({listData: fetcharray, data: '',email:''});
+        this.props.actions.createItem({name: this.state.data, email: this.state.email}).then(data => {
+            var fetcharray = this.state.listData.slice();
+            fetcharray.push({name: this.state.data, email: this.state.email});
+            this.setState({listData: fetcharray, data: '', email: ''});
+        });
     }
     render() {
         return (
@@ -61,4 +67,19 @@ class Content extends React.Component {
                 );
     }
 }
-export default ShowList;
+function mapStateToProps(state, ownProps) {
+    let cat = {
+        data: '',
+        email: '',
+        listData: []
+    };
+    return {data: cat};
+}
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(listActions, dispatch)
+    };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ShowList);

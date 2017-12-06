@@ -1,4 +1,4 @@
-class CatsApi {
+class listApi {
 
     static requestHeaders() {
         return {'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`}
@@ -50,13 +50,14 @@ class CatsApi {
         });
     }
 
-    static deleteCat(cat) {
+    static addintoList(cat) {
+        console.log('is it coming here ',cat)
         const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
-        const request = new Request(`${process.env.API_HOST}/api/v1/cats/${cat.id}`, {
-            method: 'DELETE',
-            headers: headers
+        const request = new Request(`http://192.168.1.222:3000/todos`, {
+            method: 'POST',
+            headers: headers,
+            body:JSON.stringify(cat)
         });
-
         return fetch(request).then(response => {
             return response.json();
         }).catch(error => {
@@ -65,4 +66,4 @@ class CatsApi {
     }
 }
 
-export default CatsApi;
+export default listApi;
