@@ -1,8 +1,8 @@
 import * as types from '../actions/actiontype';
 import {browserHistory} from 'react-router';
-import initialstate from './listreducer';
-
-export default function list(state = initialstate, action) {
+import initialstate from './initialstate';
+console.log(initialstate.listData,'initialstate')
+export default function list(state = initialstate.listData, action) {
     switch (action.type) {
         case types.ADD_LIST_SUCCESS:
             return [
@@ -20,6 +20,9 @@ export default function list(state = initialstate, action) {
                 ...state.filter(cat => cat.id !== action.cat.id),
                 Object.assign({}, action.cat)
             ]
+        case types.LOAD_LIST_SUCCESS:
+            console.log(action.cats,'fine')
+            return action.cats
         case types.DELETE_CAT_SUCCESS:
         {
             const newState = Object.assign([], state);

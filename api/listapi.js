@@ -4,11 +4,11 @@ class listApi {
         return {'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`}
     }
 
-    static getAllCats() {
+    static getAllList() {
         const headers = this.requestHeaders();
-        const request = new Request(`${process.env.API_HOST}/api/v1/cats`, {
+        const request = new Request(`http://192.168.1.222:3000/todos`, {
             method: 'GET',
-            headers: headers
+            //headers: headers
         });
 
         return fetch(request).then(response => {

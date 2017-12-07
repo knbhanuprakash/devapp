@@ -27,6 +27,9 @@ class ShowList extends React.Component {
             this.setState({listData: fetcharray, data: '', email: ''});
         });
     }
+    componentDidMount() {
+        this.props.actions.loadlist();
+    }
     render() {
         return (
                 <div>
