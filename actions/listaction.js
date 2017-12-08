@@ -12,7 +12,7 @@ import listApi from '../api/listapi';
 export function createItem(cat) {
     return function (dispatch) {
         return listApi.addintoList(cat).then(cats => {
-            dispatch({type: types.ADD_LIST_SUCCESS, cat});
+            dispatch({type: types.ADD_LIST_SUCCESS, cats});
         }).catch(error => {
             throw(error);
         });

@@ -37,10 +37,14 @@ class ShowList extends React.Component {
     componentDidMount() {
         this.props.actions.loadlist();
     }
-    componentWillReceiveProps(props) {
-        this.state.listData = props.listData;
+    componentWillReceiveProps(nextProps) {
+        console.log('reccieve',nextProps)
+    } componentWillupdate(){
+        cosole.log("DSvdsv")
+        return true;
     }
     render() {
+        console.log('thisssss',this.props.listData.length)
          const tablecss={
                     marginLeft:'500px'
                 }
@@ -87,6 +91,7 @@ class Content extends React.Component {
 }
 function mapStateToProps(state, ownProps) {
     const {listData} = state.list
+                    console.log(state.list.listData.length,'fine-----')
     return {listData};
 }
 

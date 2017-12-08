@@ -4,24 +4,19 @@ import initialstate from './initialstate';
 export default function list(state = initialstate, action) {
     switch (action.type) {
         case types.ADD_LIST_SUCCESS:
-            state.listData.unshift(action.cat)
+            state.listData.unshift(action.cats.result)
             return {listData: state.listData}
         case types.LOAD_LIST_SUCCESS:
-            console.log(action.cats, 'find a solution')
             return Object.assign({}, state, {
                 listData: action.cats
             })
         case types.Delete_LIST_SUCCESS:
         {
-            console.log(action.cat,state.listData.length,'before update')
-            const indexOfCatToDelete = state.listData.findIndex(cat => {
-                return cat.id == action.cat.id
+            var tempdata=[];
+            tempdata=state.listData.filter(cat=>{
+                return cat.id !=action.cat.id;
             })
-            console.log(indexOfCatToDelete, 'find')
-            if (indexOfCatToDelete != -1) {
-                state.listData.splice(indexOfCatToDelete, 1);
-                return {listData: state.listData}
-            }
+            return Object.assign({}, state,{listData: tempdata})
         }
         case types.Update_LIST_SUCCESS:
         {
