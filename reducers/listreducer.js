@@ -4,9 +4,11 @@ import initialstate from './initialstate';
 export default function list(state = initialstate, action) {
     switch (action.type) {
         case types.ADD_LIST_SUCCESS:
+            console.log(action.cats,'fwhi add')
             state.listData.unshift(action.cats.result)
             return {listData: state.listData}
         case types.LOAD_LIST_SUCCESS:
+            console.log(action.cats, 'find a solution')
             return Object.assign({}, state, {
                 listData: action.cats
             })
