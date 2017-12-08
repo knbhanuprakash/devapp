@@ -33,6 +33,17 @@ class listApi {
             return error;
         });
     }
+    static deleteFromList(cat) {
+        const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
+        const request = new Request(`http://192.168.1.222:3000/todos/${cat.id}`, {
+            method: 'DELETE',
+        });
+        return fetch(request).then(response => {
+            return response.json();
+        }).catch(error => {
+            return error;
+        });
+    }
 
     static createCat(cat) {
         const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());

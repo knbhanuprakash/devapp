@@ -6,7 +6,7 @@ var config = {
     },
     devServer: {
         inline: true,
-        port: 4000,
+        port: 2000,
         historyApiFallback: true
     },
     module: {
@@ -23,3 +23,4 @@ var config = {
     }
 }
 module.exports = config;
+

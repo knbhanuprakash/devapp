@@ -12,8 +12,11 @@ class ShowList extends React.Component {
             email: '',
             listData: []
         }
+         
         this.updateState = this.updateState.bind(this);
         this.savedata = this.savedata.bind(this);
+        this.updateData = this.updateData.bind(this);
+        this.deleteData = this.deleteData.bind(this);
     }
     updateState(type, event) {
         var obj = {};
@@ -22,26 +25,36 @@ class ShowList extends React.Component {
     }
     savedata() {
         this.props.actions.createItem({name: this.state.data, email: this.state.email}).then(data => {
-            var fetcharray = this.state.listData.slice();
-            fetcharray.push({name: this.state.data, email: this.state.email});
-            this.setState({listData: fetcharray, data: '', email: ''});
+            this.setState({data: '', email: ''});
         });
+    }
+    updateData(data) {
+        this.props.actions.updateItem(data);
+    }
+    deleteData(data) {
+        this.props.actions.deleteItem(data);
     }
     componentDidMount() {
         this.props.actions.loadlist();
     }
+    componentWillReceiveProps(props) {
+        this.state.listData = props.listData;
+    }
     render() {
+         const tablecss={
+                    marginLeft:'500px'
+                }
         return (
                 <div>
-                    <input type='text' className="form-control" value={this.state.data} onChange = {(e) => this.updateState('data', e)}/>
+                    <input style={tablecss} type='text' className="form-control" value={this.state.data} onChange = {(e) => this.updateState('data', e)}/>
                     <input type='text' className="form-control" value={this.state.email} onChange = {(e) => this.updateState('email', e)}/>
-                    <input type='submit' className="form-control" onClick={this.savedata}/>
+                    <input  type='submit' className="form-control" onClick={this.savedata}/>
                     <div>
-                        <table border='0'>
+                        <table border='0' style={tablecss}>
                             <thead>
                                 <tr>
                                     <th>
-                                        Name
+                                        Names{this.props.listData.length}
                                     </th>
                                     <th>
                                         Email
@@ -49,8 +62,8 @@ class ShowList extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.listData.map((dynamicComponent, i) => <Content 
-                                key = {i} componentData = {dynamicComponent}/>)}
+                                {this.props.listData.map((dynamicComponent, i) => <Content 
+                                key = {i} componentData = {dynamicComponent} updateData={this.updateData} deleteData={this.deleteData}/>)}
                             </tbody>
                 
                         </table>
@@ -66,17 +79,15 @@ class Content extends React.Component {
                  <tr>
                     <td>{this.props.componentData.name}</td>    
                     <td>{this.props.componentData.email}</td>     
+                    <td onClick={() => this.props.deleteData(this.props.componentData)}><button >Delete</button></td>     
+                    <td onClick={() => this.props.updateData(this.props.componentData)}><button >Update</button></td>     
                 </tr>
                 );
     }
 }
 function mapStateToProps(state, ownProps) {
-    let cat = {
-        data: '',
-        email: '',
-        listData: []
-    };
-    return {data: cat};
+    const {listData} = state.list
+    return {listData};
 }
 
 
