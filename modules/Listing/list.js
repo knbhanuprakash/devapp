@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as listActions from '../../actions/listaction';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import { Button } from 'react-bootstrap';
 
 class ShowList extends React.Component {
     constructor(props) {
@@ -12,7 +14,7 @@ class ShowList extends React.Component {
             email: '',
             listData: []
         }
-         
+
         this.updateState = this.updateState.bind(this);
         this.savedata = this.savedata.bind(this);
         this.updateData = this.updateData.bind(this);
@@ -38,60 +40,65 @@ class ShowList extends React.Component {
         this.props.actions.loadlist();
     }
     componentWillReceiveProps(nextProps) {
-        console.log('reccieve',nextProps)
-    } componentWillupdate(){
-        cosole.log("DSvdsv")
+        console.log('reccieve', nextProps)
+    }
+    componentWillupdate() {
+        console.log("DSvdsv")
         return true;
     }
     render() {
-        console.log('thisssss',this.props.listData.length)
-         const tablecss={
-                    marginLeft:'500px'
-                }
+        const tablecss = {
+            marginLeft: '500px'
+        }
+
         return (
                 <div>
-                    <input style={tablecss} type='text' className="form-control" value={this.state.data} onChange = {(e) => this.updateState('data', e)}/>
-                    <input type='text' className="form-control" value={this.state.email} onChange = {(e) => this.updateState('email', e)}/>
-                    <input  type='submit' className="form-control" onClick={this.savedata}/>
-                    <div>
-                        <table border='0' style={tablecss}>
+                    <input style={tablecss} type='text' className="form-control-six" value={this.state.data} onChange = {(e) => this.updateState('data', e)}/>
+                    <input type='text' className="form-control-six" value={this.state.email} onChange = {(e) => this.updateState('email', e)}/>
+                    <input  type='submit' className="form-control-six" onClick={this.savedata}/>
+                    <div className="col-md-6" style={tablecss}>
+                        <table className="table table-theme table-hover" border='0' >
                             <thead>
                                 <tr>
                                     <th>
-                                        Names{this.props.listData.length}
+                                       Names
                                     </th>
                                     <th>
                                         Email
+                                    </th>
+                                    <th>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {this.props.listData.map((dynamicComponent, i) => <Content 
-                                key = {i} componentData = {dynamicComponent} updateData={this.updateData} deleteData={this.deleteData}/>)}
+key = {i} componentData = {dynamicComponent} updateData={this.updateData} deleteData={this.deleteData}/>)}
                             </tbody>
                 
                         </table>
                     </div>
                 </div>
-
                 );
     }
 }
 class Content extends React.Component {
     render() {
+        const tablecenter = {
+            textAlign: 'right'
+        }
         return (
                  <tr>
                     <td>{this.props.componentData.name}</td>    
                     <td>{this.props.componentData.email}</td>     
-                    <td onClick={() => this.props.deleteData(this.props.componentData)}><button >Delete</button></td>     
-                    <td onClick={() => this.props.updateData(this.props.componentData)}><button >Update</button></td>     
-                </tr>
+                    <td style={tablecenter}>
+                        <button onClick={() => this.props.deleteData(this.props.componentData)} >Delete</button><button onClick={() => this.props.updateData(this.props.componentData)}>Update</button></td>     
+                 </tr>
                 );
     }
 }
 function mapStateToProps(state, ownProps) {
-    const {listData} = state.list
-                    console.log(state.list.listData.length,'fine-----')
+    const {listData} = state.list;
+    console.log(state.list.listData.length, 'fine-----')
     return {listData};
 }
 

@@ -1,12 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
-import { Provider } from 'react-redux';
-import configureStore from './storecreate';
-const store = configureStore();
+import "!!style-loader!css-loader!./node_modules/bootstrap/dist/css/bootstrap.css";
+import './scss/_custom.scss';
+import '!!style-loader!css-loader!./scss/custom.css';
+import '!!style-loader!css-loader!./scss/font-awesome.min.css';
+import '!!style-loader!file-loader!./scss/simple-line-icons.min.css';
+import ShowList from './modules/Listing/list';
+import Routes from './route';
+import Header from './modules/Header/header';
+import Sidebar from './modules/sidebar/sidebar';
 
-ReactDOM.render(<Provider store={store}> 
-<App />
-</Provider>
-, document.getElementById('app'));
+ReactDOM.render((
+        <div  className="app"F>
+            <Header/>
+            <div className="app-body">
+                <Sidebar/> 
+                <Routes />
+            </div>
+        </div>
+), document.getElementById('root'));
 

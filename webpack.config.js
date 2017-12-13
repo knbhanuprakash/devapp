@@ -6,7 +6,7 @@ var config = {
     },
     devServer: {
         inline: true,
-        port: 2000,
+        port: 4000,
         historyApiFallback: true
     },
     module: {
