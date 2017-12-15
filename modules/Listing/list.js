@@ -27,7 +27,7 @@ class ShowList extends React.Component {
     }
     savedata() {
         this.props.actions.createItem({name: this.state.data, email: this.state.email}).then(data => {
-            this.setState({data: '', email: ''});
+            this.setState({data: '', email: '',listData:[]});
         });
     }
     updateData(data) {
@@ -71,8 +71,7 @@ class ShowList extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.listData.map((dynamicComponent, i) => <Content 
-key = {i} componentData = {dynamicComponent} updateData={this.updateData} deleteData={this.deleteData}/>)}
+                                
                             </tbody>
                 
                         </table>

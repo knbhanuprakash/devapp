@@ -6,6 +6,8 @@ import {createBrowserHistory} from 'history';
 import {Router, Route, Switch, Redirect} from 'react-router-dom';
 import Login from './modules/login/Login';
 import ShowList from './modules/Listing/list';
+import Gallery from './modules/Gallery/gallery';
+import Upload from './modules/uploads/upload';
 
 const store = configureStore();
 const history = createBrowserHistory();
@@ -18,6 +20,8 @@ class Routes extends React.Component {
                         <Switch>
                         <Route  path="/login" name="Login Page" component={Login}/>
                         <Route path="/list" name="Dashboard" component={ShowList}/>
+                        <Route path="/gallery" name="Dashboard" component={Gallery}/>
+                        <Route path="/upload" name="Dashboard" component={Upload}/>
                         <Redirect from="/" name="Home"  to="/list"/>
                         </Switch>
                     </Router>
