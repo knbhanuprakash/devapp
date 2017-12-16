@@ -63,7 +63,7 @@ class Sidebar extends Component {
                                 <a className="nav-link" href="widgets.html"><i className="icon-calculator"></i> Widgets <span className="badge badge-primary">NEW</span></a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="charts.html"><i className="icon-pie-chart"></i> Charts</a>
+                                <a className="nav-link" href="charts.html" href="/cart"><i className="icon-pie-chart"></i> Carts</a>
                             </li>
                             <li className="divider"></li>
                             <li className="nav-title">

@@ -80,13 +80,13 @@ class Header extends Component {
         <NavbarToggler className="d-md-down-none" onClick={this.sidebarToggle}>&#9776;</NavbarToggler>
         <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
-            <NavLink href="/gallery">Gallery</NavLink>
+            <NavLink href="#/gallery">Gallery</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink href="/list">Users</NavLink>
+            <NavLink href="#/list">Users</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink href="/upload">upload</NavLink>
+            <NavLink href="#/upload">upload</NavLink>
           </NavItem>
         </Nav>
             <Button onClick={this.toggleLarge}>Launch large modal</Button>
@@ -133,7 +133,9 @@ class Header extends Component {
                 <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
                 <DropdownItem ><i className="fa fa-user"></i> <a type='button' >Profile</a></DropdownItem>
                 <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
-                <DropdownItem><i className="fa fa-lock"></i> Logout</DropdownItem>
+                 <NavItem className="px-6">
+                 <NavLink href="#/login">logout</NavLink>          
+                </NavItem>
               </DropdownMenu>
             </Dropdown>
           </NavItem>

@@ -12,10 +12,8 @@ import Header from './modules/Header/header';
 import Sidebar from './modules/sidebar/sidebar';
 
 ReactDOM.render((
-        <div  className="app">
-            <Header/>
-            <div className="app-body">
-                <Sidebar/> 
+        <div  >
+            <div >
                 <Routes />
             </div>
         </div>

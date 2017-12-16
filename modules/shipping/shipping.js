@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import * as uploadActions from '../../actions/uploadaction';
 import {bindActionCreators} from 'redux';
 
@@ -19,11 +19,12 @@ import {Badge, Row, Col, Card, CardHeader, CardFooter, CardBlock, Label, Input, 
   InputGroupAddon,
   InputGroupButton
 } from "reactstrap";
+
 import ImageUploader from 'react-images-upload';
 
 import {connect} from 'react-redux';
 
-class Upload extends React.Component {
+class Shipping extends React.Component {
 
     constructor(props) {
         super(props);
@@ -31,7 +32,6 @@ class Upload extends React.Component {
             name: '',
             decription: '',
             images:[],
-            pictures:[]
         }
 
         this.uploadImage = this.uploadImage.bind(this);
@@ -51,8 +51,6 @@ class Upload extends React.Component {
         this.props.actions.addproduct(formData).then(data => {
             this.setState({name:'', decription:'',images:[]});
         });
-        document.body.find('.deleteImage').click();
-        
     }
     onDrop(picture) {
         this.setState({
@@ -65,65 +63,66 @@ class Upload extends React.Component {
         this.setState(obj);
     }
     render() {
-        const moveright={
-            'marginLeft':'300px'
-        }
-        return (
-         <div className="animated fadeIn" style={moveright}>
-        <Row>
-          <Col xs="12" sm="12">
+        <div>
+ <Col xs="12" sm="6">
             <Card>
               <CardHeader>
-                <strong>Upload</strong>
-                <small> Products</small>
+                <strong>Company</strong>
+                <small> Form</small>
               </CardHeader>
               <CardBlock className="card-body">
-               
+                <FormGroup>
+                  <Label htmlFor="company">Company</Label>
+                  <Input type="text" id="company" placeholder="Enter your company name"/>
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="vat">VAT</Label>
+                  <Input type="text" id="vat" placeholder="DE1234567890"/>
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="street">Street</Label>
+                  <Input type="text" id="street" placeholder="Enter street name"/>
+                </FormGroup>
                 <FormGroup row>
                   <Col xs="8">
                     <FormGroup>
-                      <Label htmlFor="city">Product Name</Label>
-                      <Input type="text" id="city" placeholder="Name" value={this.state.name} onChange = {(e) => this.updateState('name', e)}/>
+                      <Label htmlFor="city">City</Label>
+                      <Input type="text" id="city" placeholder="Enter your city"/>
                     </FormGroup>
                   </Col>
                   <Col xs="8">
                     <FormGroup>
-                      <Label htmlFor="postal-code">Product Description</Label>
-                      <Input type="text" id="postal-code" placeholder="description" value={this.state.decription} onChange = {(e) => this.updateState('decription', e)}/>
+                      <Label htmlFor="postal-code">Postal Code</Label>
+                      <Input type="text" id="postal-code" placeholder="Postal Code"/>
                     </FormGroup>
-                  </Col>
-                  <Col xs="8">
-                     <ImageUploader
-                withIcon={true}
-                buttonText='Choose images'
-                onChange={this.onDrop}
-                imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                maxFileSize={5242880}
-                images={this.pictures}
-            />
                   </Col>
                 </FormGroup>
                 <FormGroup>
-                <button onClick={this.uploadImage}>Submit</button>
+                  <Label htmlFor="country">Country</Label>
+                  <Input type="text" id="country" placeholder="Country name"/>
                 </FormGroup>
               </CardBlock>
             </Card>
           </Col>
-        </Row>
         </div>
-                )
     }
-}
-function mapStateToProps(state, ownProps) {
-    const {listData} = state.list;
-    console.log(state.list.listData.length, 'fine-----')
-    return {listData};
-}
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(uploadActions, dispatch)
-    };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Upload);
+    }
 
+
+export default Shipping;
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

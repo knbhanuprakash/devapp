@@ -1,16 +1,31 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import React, {Component} from "react";
 import {Container, Row, Col, CardGroup, Card, CardBlock, Button, Input, InputGroup, InputGroupAddon} from "reactstrap";
-
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as loginActions from '../../actions/loginactions';
 
 class Login extends Component {
-  render() {
+  constructor(props) {
+        super(props);
+
+        this.state = {
+            email: '',
+            password: ''
+        }
+
+        this.login = this.login.bind(this);
+    }
+     updateState(type, event) {
+        var obj = {};
+        obj[type] = event.target.value;
+        this.setState(obj);
+    }
+     login() {
+        this.props.actions.loginuser({password: this.state.password, email: this.state.email}).then(data => {
+            this.setState({email: '',password:''});
+        });
+    }
+    render() {
     return (
       <div className="app flex-row align-items-center">
         <Container>
@@ -23,15 +38,15 @@ class Login extends Component {
                     <p className="text-muted">Sign In to your account</p>
                     <InputGroup className="mb-3">
                       <InputGroupAddon><i className="icon-user"></i></InputGroupAddon>
-                      <Input type="text" placeholder="Username"/>
+                      <Input type="text" placeholder="Username" value={this.state.email} onChange = {(e) => this.updateState('email', e)}/>
                     </InputGroup>
                     <InputGroup className="mb-4">
                       <InputGroupAddon><i className="icon-lock"></i></InputGroupAddon>
-                      <Input type="password" placeholder="Password"/>
+                      <Input type="password" placeholder="Password" value={this.state.password} onChange = {(e) => this.updateState('password', e)}/>
                     </InputGroup>
                     <Row>
                       <Col xs="6">
-                        <Button color="primary" className="px-4">Login</Button>
+                        <Button color="primary" className="px-4" onClick={this.login}>Login</Button>
                       </Col>
                       <Col xs="6" className="text-right">
                         <Button color="link" className="px-0">Forgot password?</Button>
@@ -57,5 +72,15 @@ class Login extends Component {
     );
   }
 }
+function mapStateToProps(state, ownProps) {
+    const {listData} = state.list;
+    console.log(state.list.listData.length, 'fine-----')
+    return {listData};
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(loginActions, dispatch)
+    };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
-export default Login;

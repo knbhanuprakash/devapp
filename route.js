@@ -3,31 +3,27 @@ import React from 'react';
 
 import configureStore from './storecreate';
 import {createBrowserHistory} from 'history';
-import {Router, Route, Switch, Redirect} from 'react-router-dom';
-import Login from './modules/login/Login';
-import ShowList from './modules/Listing/list';
-import Gallery from './modules/Gallery/gallery';
-import Upload from './modules/uploads/upload';
+import {Router , Route, Switch, Redirect} from 'react-router-dom';
+
+import AppFull from './approutes';
+import Login from './modules/login/login';
 
 const store = configureStore();
 const history = createBrowserHistory();
-
+import {HashRouter, Link} from 'react-router-dom';
 class Routes extends React.Component {
     render() {
         return (
                 <Provider store={store}> 
-                    <Router history={history}>
+                    <HashRouter>
                         <Switch>
                         <Route  path="/login" name="Login Page" component={Login}/>
-                        <Route path="/list" name="Dashboard" component={ShowList}/>
-                        <Route path="/gallery" name="Dashboard" component={Gallery}/>
-                        <Route path="/upload" name="Dashboard" component={Upload}/>
-                        <Redirect from="/" name="Home"  to="/list"/>
+                        <Route  path="/dashboard" name="Login Page" component={AppFull}/>
+                        <Redirect from="/" name="Home"  to="login"/>
                         </Switch>
-                    </Router>
+                    </HashRouter >
                 </Provider>
                 )
     }
 }
-
 export default Routes;
