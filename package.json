@@ -4,7 +4,8 @@
   "description": "developing",
   "main": "index.js",
   "scripts": {
-    "start": "set PORT=4000 && webpack-dev-server --hot"
+    "start": "set PORT=4000 && webpack-dev-server --hot",
+    "build":"webpack"
   },
   "author": "",
   "license": "ISC",

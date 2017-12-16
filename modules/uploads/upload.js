@@ -41,17 +41,17 @@ class Upload extends React.Component {
     uploadImage(){
         var formData = new FormData();
 //        for (var i=0; i < this.state.images; i++) {
-//       formData.append('picture', this.state.images[i]);
+//            console.log(this.state.images[i],'find')
+//       formData.append('image', this.state.images[i]);
 //    } 
     this.state.images.filter(function(val){
-         formData.append('image', val);
+         formData.append('image', val[0]);
     })
     formData.append('name', this.state.name);
-    formData.append('gender', this.state.decription);
+    formData.append('description', this.state.decription);
         this.props.actions.addproduct(formData).then(data => {
             this.setState({name:'', decription:'',images:[]});
         });
-        document.body.find('.deleteImage').click();
         
     }
     onDrop(picture) {

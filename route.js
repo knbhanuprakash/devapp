@@ -17,9 +17,8 @@ class Routes extends React.Component {
                 <Provider store={store}> 
                     <HashRouter>
                         <Switch>
-                        <Route  path="/login" name="Login Page" component={Login}/>
-                        <Route  path="/dashboard" name="Login Page" component={AppFull}/>
-                        <Redirect from="/" name="Home"  to="login"/>
+                        <Route exact  path="/login" name="Login Page" component={Login}/>
+                        <Route path="/" name="Home" component={AppFull}/>
                         </Switch>
                     </HashRouter >
                 </Provider>

@@ -27,6 +27,7 @@ class Header extends Component {
     this.toggle = this.toggle.bind(this);
     this.toggleLarge = this.toggleLarge.bind(this);
     this.togglePrimary = this.togglePrimary.bind(this);
+    this.logout = this.logout.bind(this);
    
   }
 
@@ -35,10 +36,11 @@ class Header extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-  
+  logout(){
+      window.location.href='#/login'
+  }
 
  togglePrimary() {
-     console.log('hi......')
     this.setState({
       primary: !this.state.primary
     });
@@ -80,13 +82,13 @@ class Header extends Component {
         <NavbarToggler className="d-md-down-none" onClick={this.sidebarToggle}>&#9776;</NavbarToggler>
         <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
-            <NavLink href="#/gallery">Gallery</NavLink>
+            <NavLink href="#/components/gallery">Gallery</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink href="#/list">Users</NavLink>
+            <NavLink href="#/components/list">Users</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink href="#/upload">upload</NavLink>
+            <NavLink href="#/components/upload">upload</NavLink>
           </NavItem>
         </Nav>
             <Button onClick={this.toggleLarge}>Launch large modal</Button>
@@ -133,9 +135,7 @@ class Header extends Component {
                 <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
                 <DropdownItem ><i className="fa fa-user"></i> <a type='button' >Profile</a></DropdownItem>
                 <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
-                 <NavItem className="px-6">
-                 <NavLink href="#/login">logout</NavLink>          
-                </NavItem>
+                <DropdownItem onClick={this.logout}><i className="fa fa-wrench" ></i> Logout</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </NavItem>

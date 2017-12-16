@@ -18,11 +18,11 @@ class AppFull extends Component {
             <Container fluid>
               <Switch>
                 <Route path="/dashboard" name="Dashboard" component={Gallery}/>
-                  <Route path="/list" name="Dashboard" component={ShowList}/>
-                            <Route path="/gallery" name="Dashboard" component={Gallery}/>
-                            <Route path="/upload" name="Dashboard" component={Upload}/>
-                            <Route path="/cart" name="Dashboard" component={Shipping}/>
-                            <Route path="/dashboard" name="Dashboard" component={AppFull}/>
+                  <Route path="/components/list" name="Dashboard" component={ShowList}/>
+                  <Route path="/components/gallery" name="Dashboard" component={Gallery}/>
+                  <Route path="/components/upload" name="Dashboard" component={Upload}/>
+                  <Route path="/components/cart" name="Dashboard" component={Shipping}/>
+                  <Redirect from="/" name="Home"  to="dashboard"/>
               </Switch>
             </Container>
           </main>

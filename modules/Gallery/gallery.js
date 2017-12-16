@@ -8,124 +8,50 @@ class Gallery extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            data: []
+        }
     }
     componentDidMount() {
-        this.props.actions.gettheproducts();
+        this.props.actions.gettheproducts().then(data => {
+            console.log('dta', data.result)
+            this.setState({data:data.result});
+        });
     }
     render() {
         return (
                 <div className="animated fadeIn">
                     <Row>
-                        <Col xs="12" sm="6" md="4">
-                        <Card>
-                        <CardHeader onClick={e => this.addcard(e)}>
-                          Item
-                        </CardHeader>
-                        <CardBlock className="card-body">
-                           <img src='../../scss/img/avatars/8.jpg'  alt="admin@bootstrapmaster.com"/>
-                           <div>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            </div>
-                        </CardBlock>
-                        </Card>
-                        </Col>
-                        <Col xs="12" sm="6" md="4">
-                        <Card>
-                        <CardHeader onClick={e => this.addcard(e)}>
-                          Item
-                        </CardHeader>
-                        <CardBlock className="card-body">
-                           <img src='../../scss/img/avatars/8.jpg'  alt="admin@bootstrapmaster.com"/>
-                           <div>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            </div>
-                        </CardBlock>
-                        </Card>
-                        </Col>
-                        <Col xs="12" sm="6" md="4">
-                        <Card>
-                        <CardHeader onClick={e => this.addcard(e)}>
-                          Item
-                        </CardHeader>
-                        <CardBlock className="card-body">
-                           <img src='../../scss/img/avatars/8.jpg'  alt="admin@bootstrapmaster.com"/>
-                           <div>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            </div>
-                        </CardBlock>
-                        </Card>
-                        </Col>
-                        <Col xs="12" sm="6" md="4">
-                        <Card>
-                        <CardHeader onClick={e => this.addcard(e)}>
-                          Item
-                        </CardHeader>
-                        <CardBlock className="card-body">
-                           <img src='../../scss/img/avatars/6.jpg'  alt="admin@bootstrapmaster.com"/>
-                           <div>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            </div>
-                        </CardBlock>
-                        </Card>
-                        </Col>
-                        <Col xs="12" sm="6" md="4">
-                        <Card>
-                        <CardHeader onClick={e => this.addcard(e)}>
-                          Item
-                        </CardHeader>
-                        <CardBlock className="card-body">
-                           <img src='../../scss/img/avatars/5.jpg'  alt="admin@bootstrapmaster.com"/>
-                           <div>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            </div>
-                        </CardBlock>
-                        </Card>
-                        </Col>
-                        <Col xs="12" sm="6" md="4">
-                        <Card>
-                        <CardHeader onClick={e => this.addcard(e)}>
-                          Item
-                        </CardHeader>
-                        <CardBlock className="card-body">
-                           <img src='../../scss/img/avatars/8.jpg'  alt="admin@bootstrapmaster.com"/>
-                           <div>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            </div>
-                        </CardBlock>
-                        </Card>
-                        </Col>
-                        <Col xs="12" sm="6" md="4">
-                        <Card>
-                        <CardHeader onClick={e => this.addcard(e)}>
-                          Item
-                        </CardHeader>
-                        <CardBlock className="card-body">
-                           <img src='../../scss/img/avatars/7.jpg'  alt="admin@bootstrapmaster.com"/>
-                           <div>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            </div>
-                        </CardBlock>
-                        </Card>
-                        </Col>
-                
+                        {this.state.data.map((dynamicComponent, i) => <Gallerycontent 
+                            key = {i} componentData = {dynamicComponent}/>)}
                     </Row>
                 
                 </div>
                 )
+    }
+}
+
+class Gallerycontent extends React.Component {
+    render() {
+        const imagecss={
+            width:"300px",
+            height:"250px"
+        }
+        return (
+                <Col xs="12" sm="6" md="4">
+                <Card>
+                <CardHeader onClick={e => this.addcard(e)}>
+                <bold>Product Name:</bold>{this.props.componentData.name}
+                </CardHeader>
+                <CardBlock className="card-body">
+                    <img src={this.props.componentData.Path}  alt="admin@bootstrapmaster.com" style={imagecss} />
+                    <div>
+                       {this.props.componentData.description}
+                    </div>
+                </CardBlock>
+                </Card>
+                </Col>
+                );
     }
 }
 function mapStateToProps(state, ownProps) {
